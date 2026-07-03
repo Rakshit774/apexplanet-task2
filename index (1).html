@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daybook — Contact &amp; Task Manager</title>
+
+  <!-- Google Fonts: Fraunces (display), Inter (body), JetBrains Mono (utility/data) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ PAGE HEADER ============ -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="28" height="28">
+            <path d="M6 16c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M12 16l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand__text">Daybook</span>
+      </div>
+      <p class="site-header__tagline">Say hello, then get things done.</p>
+    </div>
+  </header>
+
+  <!-- ============ MAIN GRID LAYOUT ============ -->
+  <main class="page">
+
+    <!-- ---------- CONTACT FORM SECTION ---------- -->
+    <section class="panel panel--contact" aria-labelledby="contact-heading">
+      <div class="panel__header">
+        <p class="panel__eyebrow">Get in touch</p>
+        <h2 id="contact-heading" class="panel__title">Send a message</h2>
+        <p class="panel__subtitle">Fields marked with an asterisk are required.</p>
+      </div>
+
+      <!-- novalidate: we handle all validation ourselves in script.js -->
+      <form id="contact-form" class="contact-form" novalidate>
+
+        <div class="field">
+          <label for="name">Name <span class="field__required" aria-hidden="true">*</span></label>
+          <input type="text" id="name" name="name" placeholder="Jordan Blake" autocomplete="name" />
+          <p class="field__error" id="name-error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email <span class="field__required" aria-hidden="true">*</span></label>
+          <input type="text" id="email" name="email" placeholder="jordan@email.com" autocomplete="email" />
+          <p class="field__error" id="email-error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="subject">Subject <span class="field__required" aria-hidden="true">*</span></label>
+          <input type="text" id="subject" name="subject" placeholder="Project inquiry" autocomplete="off" />
+          <p class="field__error" id="subject-error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="message">Message <span class="field__required" aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell us a little about what you need..."></textarea>
+          <p class="field__error" id="message-error" role="alert"></p>
+        </div>
+
+        <button type="submit" class="btn btn--primary">Send message</button>
+
+        <!-- Success confirmation, hidden until a valid submit happens -->
+        <p class="form-success" id="form-success" role="status">
+          Message sent — we'll get back to you soon.
+        </p>
+      </form>
+    </section>
+
+    <!-- ---------- TO-DO LIST SECTION ---------- -->
+    <section class="panel panel--todo" aria-labelledby="todo-heading">
+      <div class="panel__header panel__header--todo">
+        <div>
+          <p class="panel__eyebrow">Today's plan</p>
+          <h2 id="todo-heading" class="panel__title">Task list</h2>
+        </div>
+
+        <!-- Signature element: circular progress ring showing % tasks complete -->
+        <div class="progress-ring" id="progress-ring" aria-hidden="true">
+          <svg viewBox="0 0 64 64" width="56" height="56">
+            <circle class="progress-ring__track" cx="32" cy="32" r="27" />
+            <circle class="progress-ring__fill" id="progress-ring-fill" cx="32" cy="32" r="27" />
+          </svg>
+          <span class="progress-ring__label" id="progress-ring-label">0%</span>
+        </div>
+      </div>
+
+      <form id="todo-form" class="todo-form" novalidate>
+        <input
+          type="text"
+          id="todo-input"
+          class="todo-form__input"
+          placeholder="Add a task, e.g. Review pull request"
+          autocomplete="off"
+        />
+        <button type="submit" class="btn btn--accent">Add task</button>
+      </form>
+      <p class="field__error" id="todo-error" role="alert"></p>
+
+      <div class="todo-meta">
+        <span class="todo-meta__count" id="todo-count">0 tasks</span>
+        <div class="todo-filters" role="group" aria-label="Filter tasks">
+          <button type="button" class="filter-btn is-active" data-filter="all">All</button>
+          <button type="button" class="filter-btn" data-filter="active">Active</button>
+          <button type="button" class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+      </div>
+
+      <ul class="todo-list" id="todo-list">
+        <!-- Task items are injected here by script.js -->
+      </ul>
+
+      <p class="todo-empty" id="todo-empty">Your list is empty. Add your first task above.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Built with HTML, CSS &amp; vanilla JavaScript.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
